@@ -1,5 +1,44 @@
+<?php
+
+use Entity\User;
+use Entity\Post;
+
+require '../vendor/autoload.php';
+
+$firstUser = new User();
+$firstUser->id = 1;
+$firstUser->username = "Layla";
+$firstUser->password = "azerty";
+
+$secondUser = new User();
+$secondUser->id = 2;
+$secondUser->username = "Val";
+$secondUser->password = "azerty2";
+
+$firstPost = new Post();
+$firstPost->id = 1;
+$firstPost->title = "Zane Alexander - D i v i s i o n";
+$firstPost->genre = "Synthwave";
+$firstPost->content = "Music Content";
+$firstPost->link = "https://soundcloud.com/thezanealexander/d-i-v-i-s-i-o-n";
+$firstPost->creationDate = time();
+$firstPost->user = $firstUser;
+
+$secondPost = new Post();
+$secondPost->id = 2;
+$secondPost->title = "Kendrick Lamar - Money Tree";
+$secondPost->genre = "Rap";
+$secondPost->content = "Music Content";
+$secondPost->link = "https://www.youtube.com/watch?v=smqhSl0u_sI";
+$secondPost->creationDate = time();
+$secondPost->user = $secondUser;
+
+$items = array($firstPost, $secondPost);
+
+?>
+
 <!doctype html>
-<html lang="en">
+<html lang="FR-fr">
 
 <head>
     <!-- Required meta tags -->
@@ -36,9 +75,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Genres</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Users</a>
-                    </li>
                     <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Dropdown
@@ -60,6 +96,7 @@
     </nav>
 
     <!-- CONTENT -->
+
     <div class="card text-center mt-5">
         <div class="card-header">
             {{Author}}
@@ -96,8 +133,9 @@
             2 days ago
         </div>
     </div>
-    <script src="script/script.js"></script>
+
     <!-- Optional JavaScript -->
+    <script src="script/script.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
