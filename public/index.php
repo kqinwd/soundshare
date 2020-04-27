@@ -27,7 +27,7 @@ $firstPost->user = $firstUser;
 
 $secondPost = new Post();
 $secondPost->id = 2;
-$secondPost->title = "Kendrick Lamar - Money Tree";
+$secondPost->title = "Kendrick Lamar - Money Trees";
 $secondPost->genre = "Rap";
 $secondPost->content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.
 ";
@@ -195,8 +195,11 @@ function video_iframe_YT($video_url)
                         <?php echo video_iframe_YT($item->link) ?>
                         <div class="card-body">
                             <p>Posted by <a href=""><?php echo $item->user->username ?></a> - <?php echo $item->creationDate ?></p>
+                            <a href="" class="h6"><?php echo $item->genre ?></a>
                             <h5 class="card-title"><?php echo $item->title ?></h5>
-                            <p class="card-text"><?php echo $item->content ?></p>
+
+                            <p class="card-text"><?php echo $item->content ?>
+                            </p>
                             <div class="row ml-auto">
                                 <a href="#" class="btn btn-primary mr-2">View post</a>
                                 <a href="#" class="btn btn-secondary">Add to playlist</a>
