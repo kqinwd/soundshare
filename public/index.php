@@ -29,11 +29,37 @@ $secondPost->id = 2;
 $secondPost->title = "Kendrick Lamar - Money Tree";
 $secondPost->genre = "Rap";
 $secondPost->content = "Music Content";
-$secondPost->link = "https://www.youtube.com/watch?v=smqhSl0u_sI";
+$secondPost->link = "https://youtu.be/smqhSl0u_sI";
 $secondPost->creationDate = time();
 $secondPost->user = $secondUser;
 
 $items = array($firstPost, $secondPost);
+
+// FONCTION EMBED VIDEO
+// VIDEO YT : clean URL
+function video_cleanURL_YT($video_url)
+{
+    if (!empty($video_url)) {
+        $video_url             = str_replace('youtu.be/', 'www.youtube.com/embed/', $video_url);
+        $video_url             = str_replace('www.youtube.com/watch?v=', 'www.youtube.com/embed/', $video_url);
+    }
+    // -----------------
+    return $video_url;
+};
+// ---------------------
+// VIDEO YT : iframe
+function video_iframe_YT($video_url)
+{
+    $video_iframe            = '';
+    // -----------------
+    if (!empty($video_url)) {
+        $video_url             = video_cleanURL_YT($video_url);
+        $video_iframe        = '<iframe width="560" height="315" src="' . $video_url . '"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+    }
+    // -----------------
+    return $video_iframe;
+};
+////////////////////////////////////////
 
 ?>
 
@@ -98,40 +124,24 @@ $items = array($firstPost, $secondPost);
     <!-- CONTENT -->
 
     <div class="card text-center mt-5">
-        <div class="card-header">
-            {{Author}}
+        <?php
+        foreach ($items as $item) {
+        ?>
+            <div class="card-header">
+                <p>Post by <?php echo $item->user->username ?> </p>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $item->title ?></h5>
+                <?php echo video_iframe_YT($item->link) ?>
 
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">{{Artist}} - {{songName}}</h5>
-
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/5zB9wyq7lI4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="http://"></a>
-            <a href="#" class="btn btn-primary">View post</a>
-        </div>
-        <div class="card-footer text-muted">
-            2 days ago
-        </div>
-    </div>
-
-    <div class="card text-center mt-5">
-        <div class="card-header">
-            {{Author}}
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">{{Artist}} - {{songName}}</h5>
-
-            <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/758438482&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="http://"></a>
-            <a href="#" class="btn btn-primary">View post</a>
-        </div>
-        <div class="card-footer text-muted">
-            2 days ago
-        </div>
+                <p class="card-text"><?php echo $item->content ?></p>
+                <a href="http://"></a>
+                <a href="#" class="btn btn-primary">View post</a>
+            </div>
+            <div class="card-footer text-muted">
+                2 days ago
+            </div>
+        <?php } ?>
     </div>
 
     <!-- Optional JavaScript -->
