@@ -84,3 +84,7 @@ display: inline;
 text-align: right;
 padding-left: 10px;
 }
+
+h5 {
+  font-weight: 600 !important;
+}
