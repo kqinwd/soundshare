@@ -257,11 +257,11 @@ function video_iframe_YT($video_url)
                 </a>
             </ul><!-- List Group END-->
         </div><!-- sidebar-container END -->
+
         <!-- MAIN -->
         <div class="col p-4">
 
             <!-- CONTENT -->
-            <!-- <div class="container"> -->
             <section>
                 <h1 class="ml-4 mb-3 font-weight-bold">Latest posts</h1>
 
