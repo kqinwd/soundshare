@@ -3,6 +3,7 @@
 namespace Entity;
 
 use Entity\User;
+use ludk\Utils\Serializer;
 
 class Post
 {
@@ -14,4 +15,6 @@ class Post
     public $link;
     public $content;
     public User $user;
+
+    use Serializer;
 }

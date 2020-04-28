@@ -1,61 +1,69 @@
 <?php
 
-use Entity\User;
 use Entity\Post;
+use ludk\Persistence\ORM;
 
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
+$orm = new ORM(__DIR__ . '/../Resources');
+$codeRepo = $orm->getRepository(Post::class);
+$items = $codeRepo->findAll();
 
-$firstUser = new User();
-$firstUser->id = 1;
-$firstUser->username = "Layla";
-$firstUser->password = "azerty";
+// use Entity\User;
+// use Entity\Post;
 
-$secondUser = new User();
-$secondUser->id = 2;
-$secondUser->username = "Val";
-$secondUser->password = "azerty2";
+// require '../vendor/autoload.php';
 
-$firstPost = new Post();
-$firstPost->id = 1;
-$firstPost->title = "Zane Alexander - D i v i s i o n";
-$firstPost->genre = "Synthwave";
-$firstPost->content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.
-";
-$firstPost->link = "https://youtu.be/618tRdZWD4g";
-$firstPost->creationDate = date("m/d/Y");
-$firstPost->user = $firstUser;
+// $firstUser = new User();
+// $firstUser->id = 1;
+// $firstUser->username = "Layla";
+// $firstUser->password = "azerty";
 
-$secondPost = new Post();
-$secondPost->id = 2;
-$secondPost->title = "Kendrick Lamar - Money Trees";
-$secondPost->genre = "Rap";
-$secondPost->content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.
-";
-$secondPost->link = "https://youtu.be/smqhSl0u_sI";
-$secondPost->creationDate = date("m/d/Y");
-$secondPost->user = $secondUser;
+// $secondUser = new User();
+// $secondUser->id = 2;
+// $secondUser->username = "Val";
+// $secondUser->password = "azerty2";
 
-$thirdPost = new Post();
-$thirdPost->id = 3;
-$thirdPost->title = "Tracy Chapman - Bang Bang Bang";
-$thirdPost->genre = "Neofolk";
-$thirdPost->content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.
-";
-$thirdPost->link = "https://youtu.be/IrRA7WMI1ks";
-$thirdPost->creationDate = date("m/d/Y");
-$thirdPost->user = $firstUser;
+// $firstPost = new Post();
+// $firstPost->id = 1;
+// $firstPost->title = "Zane Alexander - D i v i s i o n";
+// $firstPost->genre = "Synthwave";
+// $firstPost->content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.
+// ";
+// $firstPost->link = "https://youtu.be/618tRdZWD4g";
+// $firstPost->creationDate = date("m/d/Y");
+// $firstPost->user = $firstUser;
 
-$fourthPost = new Post();
-$fourthPost->id = 4;
-$fourthPost->title = "Pink Floyd - Wish You Were Here";
-$fourthPost->genre = "Classic Rock";
-$fourthPost->content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.
-";
-$fourthPost->link = "https://youtu.be/IXdNnw99-Ic";
-$fourthPost->creationDate = date("m/d/Y");
-$fourthPost->user = $secondUser;
+// $secondPost = new Post();
+// $secondPost->id = 2;
+// $secondPost->title = "Kendrick Lamar - Money Trees";
+// $secondPost->genre = "Rap";
+// $secondPost->content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.
+// ";
+// $secondPost->link = "https://youtu.be/smqhSl0u_sI";
+// $secondPost->creationDate = date("m/d/Y");
+// $secondPost->user = $secondUser;
 
-$items = array($firstPost, $secondPost, $thirdPost, $fourthPost);
+// $thirdPost = new Post();
+// $thirdPost->id = 3;
+// $thirdPost->title = "Tracy Chapman - Bang Bang Bang";
+// $thirdPost->genre = "Neofolk";
+// $thirdPost->content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.
+// ";
+// $thirdPost->link = "https://youtu.be/IrRA7WMI1ks";
+// $thirdPost->creationDate = date("m/d/Y");
+// $thirdPost->user = $firstUser;
+
+// $fourthPost = new Post();
+// $fourthPost->id = 4;
+// $fourthPost->title = "Pink Floyd - Wish You Were Here";
+// $fourthPost->genre = "Classic Rock";
+// $fourthPost->content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.
+// ";
+// $fourthPost->link = "https://youtu.be/IXdNnw99-Ic";
+// $fourthPost->creationDate = date("m/d/Y");
+// $fourthPost->user = $secondUser;
+
+// $items = array($firstPost, $secondPost, $thirdPost, $fourthPost);
 
 /////////////// FONCTION EMBED VIDEO //////////////////
 // VIDEO YT : clean URL
