@@ -57,7 +57,7 @@ $fourthPost->user = $secondUser;
 
 $items = array($firstPost, $secondPost, $thirdPost, $fourthPost);
 
-// FONCTION EMBED VIDEO
+/////////////// FONCTION EMBED VIDEO //////////////////
 // VIDEO YT : clean URL
 function video_cleanURL_YT($video_url)
 {
@@ -132,7 +132,7 @@ function video_iframe_YT($video_url)
     </nav> -->
 
     <!-- TEST SIDENAV -->
-    <div class="wrapper d-flex align-items-stretch">
+    <!-- <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu">
                 <button type="button" id="sidebarCollapse" class="btn btn-primary">
@@ -181,43 +181,173 @@ function video_iframe_YT($video_url)
                 </li>
             </ul>
 
-        </nav>
-        <!-- CONTENT -->
-        <!-- <div class="container"> -->
-        <section>
-            <h1 class="ml-2">You are what you listen</h1>
+        </nav> -->
 
-            <div class="row d-flex justify-content-around">
-                <?php
-                foreach ($items as $item) {
-                ?>
-                    <div class="card mt-3" style="width: 500px;">
-                        <?php echo video_iframe_YT($item->link) ?>
-                        <div class="card-body">
-                            <p>Posted by <a href=""><?php echo $item->user->username ?></a> - <?php echo $item->creationDate ?></p>
-                            <a href="" class="h6"><?php echo $item->genre ?></a>
-                            <h5 class="card-title"><?php echo $item->title ?></h5>
+    <!-- SIDENAV -->
+    <!-- Bootstrap NavBar -->
 
-                            <p class="card-text"><?php echo $item->content ?>
-                            </p>
-                            <div class="row ml-auto">
-                                <a href="#" class="btn btn-primary mr-2">View post</a>
-                                <a href="#" class="btn btn-secondary">Add to playlist</a>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span class="menu-collapsed">SoundShare</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#top">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">Pricing</a>
+                </li>
+                <!-- This menu is hidden in bigger devices with d-sm-none. 
+           The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
+                <li class="nav-item dropdown d-sm-block d-md-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu </a>
+                    <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+                        <a class="dropdown-item" href="#top">hjsahgjsa</a>
+                        <a class="dropdown-item" href="#top">Profile</a>
+                        <a class="dropdown-item" href="#top">Tasks</a>
+                        <a class="dropdown-item" href="#top">Etc ...</a>
+                    </div>
+                </li><!-- Smaller devices menu END -->
+            </ul>
+        </div>
+    </nav><!-- NavBar END -->
+    <!-- Bootstrap row -->
+    <div class="row" id="body-row">
+        <!-- Sidebar -->
+        <div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
+            <!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+            <!-- Bootstrap List Group -->
+            <ul class="list-group">
+                <!-- Separator with title -->
+                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                    <small>MAIN MENU</small>
+                </li>
+                <!-- /END Separator -->
+                <!-- Menu with submenu -->
+                <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-dashboard fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Dashboard</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
+                </a>
+                <!-- Submenu content -->
+                <div id='submenu1' class="collapse sidebar-submenu">
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Chahgag</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Reports</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Tables</span>
+                    </a>
+                </div>
+                <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-user fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Profile</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
+                </a>
+                <!-- Submenu content -->
+                <div id='submenu2' class="collapse sidebar-submenu">
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Settings</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Password</span>
+                    </a>
+                </div>
+                <a href="#" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-tasks fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Tasks</span>
+                    </div>
+                </a>
+                <!-- Separator with title -->
+                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                    <small>OPTIONS</small>
+                </li>
+                <!-- /END Separator -->
+                <a href="#" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-calendar fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Calendar</span>
+                    </div>
+                </a>
+                <a href="#" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-envelope-o fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Messages <span class="badge badge-pill badge-primary ml-2">5</span></span>
+                    </div>
+                </a>
+                <!-- Separator without title -->
+                <li class="list-group-item sidebar-separator menu-collapsed"></li>
+                <!-- /END Separator -->
+                <a href="#" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-question fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Help</span>
+                    </div>
+                </a>
+                <a href="#top" data-toggle="sidebar-colapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span id="collapse-icon" class="fa fa-2x mr-3"></span>
+                        <span id="collapse-text" class="menu-collapsed">Collapse</span>
+                    </div>
+                </a>
+            </ul><!-- List Group END-->
+        </div><!-- sidebar-container END -->
+        <!-- MAIN -->
+        <div class="col p-4">
+
+            <!-- CONTENT -->
+            <!-- <div class="container"> -->
+            <section>
+                <h1 class="ml-2">You are what you listen</h1>
+
+                <div class="row d-flex justify-content-around">
+                    <?php
+                    foreach ($items as $item) {
+                    ?>
+                        <div class="card mt-3" style="width: 480px;">
+                            <?php echo video_iframe_YT($item->link) ?>
+                            <div class="card-body">
+                                <a href="" class="h6 text-secondary"><?php echo $item->genre ?></a>
+                                <h5 class="card-title"><?php echo $item->title ?></h5>
+
+                                <p class="card-text"><?php echo $item->content ?>
+                                </p>
+                                <p class="text-secondary font-italic">Posted by <a href=""><?php echo $item->user->username ?></a> - <?php echo $item->creationDate ?></p>
+                                <div class="row mx-auto">
+                                    <a href="#" class="btn btn-primary mr-2">View post</a>
+                                    <a href="#" class="btn btn-secondary">Add to playlist</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
+                </div>
+                <!-- </div> -->
+            </section>
+        </div><!-- Main Col END -->
+    </div><!-- body-row END -->
 
-                <?php } ?>
-            </div>
-            <!-- </div> -->
-        </section>
+    <!-- Optional JavaScript -->
 
-        <!-- Optional JavaScript -->
-        <script src="script/script.js"></script>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="script/script.js"></script>
 </body>
 
 </html>
