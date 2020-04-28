@@ -6,7 +6,14 @@ use ludk\Persistence\ORM;
 require __DIR__ . '/../vendor/autoload.php';
 $orm = new ORM(__DIR__ . '/../Resources');
 $codeRepo = $orm->getRepository(Post::class);
-$items = $codeRepo->findAll();
+$items = array();
+
+// Search by genre
+if (isset($_GET['search'])) {
+    $items = $codeRepo->findBy(array("genre" => $_GET['search']));
+} else {
+    $items = $codeRepo->findAll();
+}
 
 // use Entity\User;
 // use Entity\Post;
