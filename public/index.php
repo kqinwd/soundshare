@@ -51,8 +51,24 @@ switch ($action) {
     case 'register':
         break;
     case 'logout':
+        if (isset($_SESSION['userId'])) {
+            unset($_SESSION['userId']);
+        }
+        header('Location: ?action=display');
         break;
     case 'login':
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $users = $userRepo->findBy(array("username" => $_POST['username'], "password" => $POST['password']));
+            if (count($users) == 1) {
+                $_SESSION['userId'] = $users[0]->id;
+                header('Location: ?action=display');
+            } else {
+                $errorMsg = "Wrong login and/or password.";
+                include "../templates/loginform.php";
+            }
+        } else {
+            include "../templates/loginform.php";
+        }
         break;
     case 'new':
         break;
@@ -74,8 +90,8 @@ switch ($action) {
         } else {
             $items = $postRepo->findAll();
         }
+        include "../templates/display.php";
+
     default:
         break;
 }
-
-include "../templates/display.php";

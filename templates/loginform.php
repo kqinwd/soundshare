@@ -38,28 +38,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#top"></a>
                 </li>
-                <!-- Log In/Out -->
-                <?php
-                if (isset($_SESSION['userId'])) {
-                ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?action=logout" role="button">Logout</a>
-                    </li>
-                <?php
-                } else {
-                ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?action=login"><span class="mr-1"><svg class="bi bi-power" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 104.922.044l.5-.866a6 6 0 11-5.908-.053l.486.875z" clip-rule="evenodd" />
-                                    <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" clip-rule="evenodd" />
-                                </svg></span>Log in</a>
-                    </li>
-                <?php
-                }
-                ?>
+                <!-- Log In -->
+                <li class="nav-item">
+                    <a class="nav-link" href="?action=login"><span class="mr-1"><svg class="bi bi-power" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 104.922.044l.5-.866a6 6 0 11-5.908-.053l.486.875z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" clip-rule="evenodd" />
+                            </svg></span>Log in</a>
+                </li>
                 <!-- Sign Up -->
                 <li class="nav-item">
-                    <a class="nav-link" href="?action=register"><span class="mr-1">Sign up</a>
+                    <a class="nav-link" href="?action/register"><span class="mr-1">Sign up</a>
                 </li>
                 <li class="nav-item ml-3">
                     <form class="form-inline">
@@ -180,35 +168,20 @@
         </div><!-- sidebar-container END -->
 
         <!-- MAIN -->
-        <div class="col p-4">
+        <div class="col p-4 my-5 p-3">
+            <div class="card col-4 mx-auto my-2 pt-3 pb-3">
+                <form method="POST" class="?action=login">
+                    <div class="form-group">
+                        <h2 class="text-center">Please login</h2>
+                        <input type="text" class="form-control" id="usernameInput" name="username" aria-describedby="emailHelp" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" id="passwordInput" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
 
-            <!-- CONTENT -->
-            <section>
-                <h1 class="ml-4 mb-3 font-weight-bold">Latest posts</h1>
-
-                <div class="row d-flex justify-content-around">
-                    <?php
-                    foreach ($items as $item) {
-                    ?>
-                        <div class="card mb-5" style="max-width: 480px;">
-                            <?php echo video_iframe_YT($item->link) ?>
-                            <div class="card-body">
-                                <a class="badge badge-dark mb-2" href="?search=<?php echo $item->genre ?>"><?php echo ($item->genre) ?></a>
-                                <h5 class="card-title"><?php echo $item->title ?></h5>
-
-                                <p class="card-text text-truncate"><?php echo htmlentities($item->content) ?>
-                                </p>
-                                <p class="text-secondary font-italic">Posted by <a href="?search=@<?php echo $item->user->username ?>"><?php echo $item->user->username ?></a> - <?php echo $item->creationDate ?></p>
-                                <div class="row mx-auto">
-                                    <a href="#" class="btn btn-primary mr-2">View post</a>
-                                    <a href="#" class="btn btn-outline-secondary">Add to playlist</a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-
-                </div>
-            </section>
         </div><!-- Main Col END -->
     </div><!-- body-row END -->
 
