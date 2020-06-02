@@ -8,12 +8,12 @@ use ludk\Utils\Serializer;
 class Post
 {
 
-    public $id;
-    public $creationDate;
-    public $title;
-    public $genre;
-    public $link;
-    public $content;
+    public int $id;
+    public string $creationDate;
+    public string $title;
+    public string $genre;
+    public string $link;
+    public string $content;
     public User $user;
 
     use Serializer;

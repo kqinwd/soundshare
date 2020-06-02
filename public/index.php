@@ -1,18 +1,47 @@
 <?php
 
 use Entity\Post;
+use Entity\User;
 use ludk\Persistence\ORM;
 
 require __DIR__ . '/../vendor/autoload.php';
+
+session_start();
+
 $orm = new ORM(__DIR__ . '/../Resources');
-$codeRepo = $orm->getRepository(Post::class);
+$postRepo = $orm->getRepository(Post::class);
+
+// $item = $postRepo->find(1);
+// // $item->title = "nouveau titre";
+// $manager = $orm->getManager();
+// $manager->persist($item);
+// $manager->flush();
+// $items = $postRepo->findAll();
+
 $items = array();
 
 // Search by genre
+// if (isset($_GET["search"])) {
+//     $items = $postRepo->findBy(array("genre" => $_GET["search"]));
+// } else {
+//     $items = $postRepo->findAll();
+// }
+
+// Search by user
 if (isset($_GET['search'])) {
-    $items = $codeRepo->findBy(array("genre" => $_GET['search']));
+    $strToSearch = $_GET['search'];
+    if (strpos($strToSearch, "@") === 0) {
+        $username = substr($strToSearch, 1);
+        $userRepo = $orm->getRepository(User::class);
+        $users = $userRepo->findBy(array("username" => $username));
+        if (count($users) == 1) {
+            $items = $postRepo->findBy(array("user" => $users[0]->id));
+        }
+    } else {
+        $items = $postRepo->findBy(array("genre" => $strToSearch));
+    }
 } else {
-    $items = $codeRepo->findAll();
+    $items = $postRepo->findAll();
 }
 
 // use Entity\User;
@@ -124,7 +153,7 @@ function video_iframe_YT($video_url)
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="?">
             <span>
                 <svg class="bi bi-play" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10.804 8L5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 010 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" clip-rule="evenodd" />
@@ -135,7 +164,7 @@ function video_iframe_YT($video_url)
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#top">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="?">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#top"></a>
@@ -145,6 +174,12 @@ function video_iframe_YT($video_url)
                                 <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 104.922.044l.5-.866a6 6 0 11-5.908-.053l.486.875z" clip-rule="evenodd" />
                                 <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" clip-rule="evenodd" />
                             </svg></span>Logout</a>
+                </li>
+                <li class="nav-item ml-3">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <!-- <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button> -->
+                    </form>
                 </li>
                 <!-- This menu is hidden in bigger devices with d-sm-none. 
            The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
@@ -272,15 +307,15 @@ function video_iframe_YT($video_url)
                         <div class="card mb-5" style="max-width: 480px;">
                             <?php echo video_iframe_YT($item->link) ?>
                             <div class="card-body">
-                                <a href="" class="h6 text-secondary"><?php echo $item->genre ?></a>
+                                <a class="badge badge-info mb-2" href="?search=<?php echo $item->genre ?>"><?php echo ($item->genre) ?></a>
                                 <h5 class="card-title"><?php echo $item->title ?></h5>
 
-                                <p class="card-text text-truncate"><?php echo $item->content ?>
+                                <p class="card-text text-truncate"><?php echo htmlentities($item->content) ?>
                                 </p>
-                                <p class="text-secondary font-italic">Posted by <a href=""><?php echo $item->user->username ?></a> - <?php echo $item->creationDate ?></p>
+                                <p class="text-secondary font-italic">Posted by <a href="?search=@<?php echo $item->user->username ?>"><?php echo $item->user->username ?></a> - <?php echo $item->creationDate ?></p>
                                 <div class="row mx-auto">
                                     <a href="#" class="btn btn-primary mr-2">View post</a>
-                                    <a href="#" class="btn btn-secondary">Add to playlist</a>
+                                    <a href="#" class="btn btn-outline-secondary">Add to playlist</a>
                                 </div>
                             </div>
                         </div>
