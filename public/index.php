@@ -51,25 +51,45 @@ switch ($action) {
     case 'register':
         break;
     case 'logout':
-        if (isset($_SESSION['userId'])) {
-            unset($_SESSION['userId']);
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
         }
         header('Location: ?action=display');
         break;
     case 'login':
         if (isset($_POST['username']) && isset($_POST['password'])) {
-            $users = $userRepo->findBy(array("username" => $_POST['username'], "password" => $POST['password']));
-            if (count($users) == 1) {
-                $_SESSION['userId'] = $users[0]->id;
-                header('Location: ?action=display');
+            $usersWithThisLogin = $userRepo->findBy(array("username" => $_POST['username']));
+            if (count($usersWithThisLogin) == 1) {
+                $firstUserWithThisLogin = $usersWithThisLogin[0];
+                if ($firstUserWithThisLogin->password != md5($_POST['password'])) {
+                    $errorMsg = "Wrong password.";
+                    include "../templates/loginform.php";
+                } else {
+                    $_SESSION['user'] = $usersWithThisLogin[0];
+                    header('Location:/?action=display');
+                }
             } else {
-                $errorMsg = "Wrong login and/or password.";
+                $errorMsg = "Nickname doesn't exist.";
                 include "../templates/loginform.php";
             }
         } else {
             include "../templates/loginform.php";
         }
         break;
+        // case 'login':
+        //     if (isset($_POST['username']) && isset($_POST['password'])) {
+        //         $users = $userRepo->findBy(array("username" => $_POST['username'], "password" => $POST['password']));
+        //         if (count($users) == 1) {
+        //             $_SESSION['userId'] = $users[0]->id;
+        //             header('Location: ?action=display');
+        //         } else {
+        //             $errorMsg = "Wrong login and/or password.";
+        //             include "../templates/loginform.php";
+        //         }
+        //     } else {
+        //         include "../templates/loginform.php";
+        //     }
+        //     break;
     case 'new':
         break;
     case 'display':

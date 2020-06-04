@@ -32,19 +32,23 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <!-- <li class="nav-item active">
                     <a class="nav-link" href="?">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="#top"></a>
-                </li>
+                </li> -->
                 <!-- Log In/Out -->
                 <?php
-                if (isset($_SESSION['userId'])) {
+                if (isset($_SESSION['user'])) {
                 ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="?action=logout" role="button">Logout</a>
+                        <a class="nav-link" href="?action=logout" role="button"><span class="mr-1"><svg class="bi bi-power" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 104.922.044l.5-.866a6 6 0 11-5.908-.053l.486.875z" clip-rule="evenodd" />
+                                    <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" clip-rule="evenodd" />
+                                </svg></span>Logout</a>
                     </li>
+
                 <?php
                 } else {
                 ?>
@@ -54,13 +58,14 @@
                                     <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" clip-rule="evenodd" />
                                 </svg></span>Log in</a>
                     </li>
+                    <!-- Sign Up -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="?action=register"><span class="mr-1">Sign up</a>
+                    </li>
                 <?php
                 }
                 ?>
-                <!-- Sign Up -->
-                <li class="nav-item">
-                    <a class="nav-link" href="?action=register"><span class="mr-1">Sign up</a>
-                </li>
+
                 <li class="nav-item ml-3">
                     <form class="form-inline">
                         <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
