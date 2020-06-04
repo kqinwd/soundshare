@@ -48,14 +48,43 @@ function video_iframe_YT($video_url)
 
 $action = $_GET["action"] ?? "display";
 switch ($action) {
+
     case 'register':
+        if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['passwordRetype'])) {
+            $errorMsg = NULL;
+            $users = $userRepo->findBy(array("username" => $_POST['username']));
+            if (count($users) > 0) {
+                $errorMsg = "Username already used.";
+            } else if ($_POST['password'] != $_POST['passwordRetype']) {
+                $errorMsg = "Passwords are not the same.";
+            } else if (strlen(trim($_POST['password'])) < 8) {
+                $errorMsg = "Your password should have at least 8 characters.";
+            } else if (strlen(trim($_POST['username'])) < 4) {
+                $errorMsg = "Your username should have at least 4 characters.";
+            }
+            if ($errorMsg) {
+                include "../templates/register.php";
+            } else {
+                $user = new User();
+                $user->username = $_POST["username"];
+                $user->password = md5($_POST['password']);
+                $_SESSION['user'] = $user;
+                $manager->persist($user);
+                $manager->flush();
+                header('Location: ?action=display');
+            }
+        } else {
+            include "../templates/register.php";
+        }
         break;
+
     case 'logout':
         if (isset($_SESSION['user'])) {
             unset($_SESSION['user']);
         }
         header('Location: ?action=display');
         break;
+
     case 'login':
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $usersWithThisLogin = $userRepo->findBy(array("username" => $_POST['username']));
@@ -69,29 +98,45 @@ switch ($action) {
                     header('Location:/?action=display');
                 }
             } else {
-                $errorMsg = "Nickname doesn't exist.";
+                $errorMsg = "Username doesn't exist.";
                 include "../templates/loginform.php";
             }
         } else {
             include "../templates/loginform.php";
         }
         break;
-        // case 'login':
-        //     if (isset($_POST['username']) && isset($_POST['password'])) {
-        //         $users = $userRepo->findBy(array("username" => $_POST['username'], "password" => $POST['password']));
-        //         if (count($users) == 1) {
-        //             $_SESSION['userId'] = $users[0]->id;
-        //             header('Location: ?action=display');
-        //         } else {
-        //             $errorMsg = "Wrong login and/or password.";
-        //             include "../templates/loginform.php";
-        //         }
-        //     } else {
-        //         include "../templates/loginform.php";
-        //     }
-        //     break;
+
     case 'new':
+        if (isset($_SESSION['user']) && isset($_POST['title']) && isset($_POST['link']) && isset($_POST['content']) && isset($_POST['genre'])) {
+            $errorMsg = NULL;
+            if (empty($_POST['title'])) {
+                $errorMsg = "Please add a title";
+            } else if ($_POST['genre'] == 'Select genre') {
+                $errorMsg = "Please add a genre";
+            } else if (empty($_POST['link'])) {
+                $errorMsg = "Missing link";
+            } else if (empty($_POST['content'])) {
+                $errorMsg = "Missing description";
+            }
+            if ($errorMsg) {
+                $posts = $postRepo->findAll();
+                include "../templates/addPost.php";
+            } else {
+                $newPost = new Post();
+                $newPost->title = $_POST['title'];
+                $newPost->genre = $_POST['genre'];
+                $newPost->content = $_POST['content'];
+                $newPost->link = $_POST['link'];
+                $manager->persist($newPost);
+                $manager->flush();
+                $newPost->user = $_SESSION['user'];
+                header('Location: ?action=display');
+            }
+        } else {
+            include '../templates/addPost.php';
+        }
         break;
+
     case 'display':
         $items = array();
         // Search by user or genre
