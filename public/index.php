@@ -74,6 +74,8 @@ switch ($action) {
         break;
 
     case 'display':
+    default:
+        $items = array();
         $homeController = new HomeController();
         $homeController->display();
         break;

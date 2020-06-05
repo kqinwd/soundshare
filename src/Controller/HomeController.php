@@ -6,10 +6,9 @@ class HomeController
 {
     public function display()
     {
-
         global $postRepo;
         global $userRepo;
-        $items = array();
+
         // Search by user or genre
         if (isset($_GET['search'])) {
             $strToSearch = $_GET['search'];
