@@ -32,41 +32,18 @@
                 <a href="?action=new" class="btn btn-large btn-dark mb-5">Add music</a>
 
             </div>
+            <h2 class="ml-4 mb-3 font-weight-bold">Latest posts</h2>
 
-            <section>
-                <h2 class="ml-4 mb-3 font-weight-bold">Latest posts</h2>
-
-                <div class="row justify-content-around">
-                    <?php
-                    foreach ($items as $item) {
-                    ?>
-                        <div class="card mb-5 col-sm-12 col-md-12 col-lg-4" style="max-width: 480px;">
-                            <?php echo video_iframe_YT($item->link) ?>
-                            <div class="card-body">
-                                <a class="badge badge-dark mb-2" href="?search=<?php echo $item->genre ?>"><?php echo ($item->genre) ?></a>
-                                <h5 class="card-title"><?php echo $item->title ?></h5>
-
-                                <p class="card-text text-truncate"><?php echo htmlentities($item->content) ?>
-                                </p>
-                                <p class="text-secondary font-italic">Posted by <a href="?search=@<?php echo $item->user->username ?>"><?php echo $item->user->username ?></a></p>
-                                <div class="row mx-auto">
-                                    <a href="#" class="btn btn-primary mr-2">View post</a>
-                                    <a href="#" class="btn btn-outline-secondary">Add to playlist</a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-
-                </div>
-            </section>
-        <?php } else { ?>
+        <?php
+        // DISPLAY ALL POSTS
+        include "../templates/displayPost.php";
+    } else { ?>
             <section>
                 <div class="text-center">
                     <p><a href="?action=login">Login</a> or <a href="?action=register">register</a> to see the latest posts</p>
                 </div>
             </section> <?php } ?>
         </div><!-- Main Col END -->
-        </div><!-- body-row END -->
 
         <!-- Optional JavaScript -->
 

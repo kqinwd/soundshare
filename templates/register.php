@@ -19,7 +19,7 @@
 
     <div class="card col-6 p-5 mt-5 shadow mb-5 bg-white rounded text-center mx-auto">
         <form method="POST" action="?action=register">
-            <h3 class="text-muted">Register</h3>
+            <h3 class="text-muted">Sign Up</h3>
             <svg class="bi bi-box-arrow-in-right text-muted" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8.146 11.354a.5.5 0 010-.708L10.793 8 8.146 5.354a.5.5 0 11.708-.708l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0z" clip-rule="evenodd" />
                 <path fill-rule="evenodd" d="M1 8a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9A.5.5 0 011 8z" clip-rule="evenodd" />
