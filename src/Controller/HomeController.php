@@ -6,6 +6,7 @@ class HomeController
 {
     public function display()
     {
+
         global $postRepo;
         global $userRepo;
         $items = array();

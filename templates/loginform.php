@@ -18,7 +18,7 @@
     <?php include "../templates/navbar.php" ?>
 
     <div class="card col-6 p-5 mt-5 shadow mb-5 bg-white rounded text-center mx-auto">
-        <form method="POST" class="?action=login">
+        <form method="POST" class="/login">
             <h3 class="text-muted">Sign in</h3>
             <?php
             if (isset($errorMsg)) {

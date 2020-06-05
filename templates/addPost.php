@@ -19,7 +19,7 @@
     <?php include "../templates/sidenav.php" ?>
 
     <div class="card col-6 p-5 mt-5 shadow mb-5 bg-white rounded text-center mx-auto" style="max-height: 600px;">
-        <form method="POST" action="?action=new">
+        <form method="POST" action="/new">
             <h3 class="text-muted">Post something</h3>
             <svg class="bi bi-box-arrow-in-right text-muted justify-self-center" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8.146 11.354a.5.5 0 010-.708L10.793 8 8.146 5.354a.5.5 0 11.708-.708l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0z" clip-rule="evenodd" />

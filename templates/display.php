@@ -29,7 +29,7 @@
             <div class="text-center">
                 <h1>What about post something ?</h1>
 
-                <a href="?action=new" class="btn btn-large btn-dark mb-5">Add music</a>
+                <a href="/new" class="btn btn-large btn-dark mb-5">Add music</a>
 
             </div>
             <h2 class="ml-4 mb-3 font-weight-bold">Latest posts</h2>
@@ -40,7 +40,7 @@
     } else { ?>
             <section>
                 <div class="text-center">
-                    <p><a href="?action=login">Login</a> or <a href="?action=register">register</a> to see the latest posts</p>
+                    <p><a href="/login">Login</a> or <a href="/register">register</a> to see the latest posts</p>
                 </div>
             </section> <?php } ?>
         </div><!-- Main Col END -->

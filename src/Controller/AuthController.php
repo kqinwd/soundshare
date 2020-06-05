@@ -20,7 +20,7 @@ class AuthController
                     include "../templates/loginform.php";
                 } else {
                     $_SESSION['user'] = $usersWithThisLogin[0];
-                    header('Location:/?action=display');
+                    header('Location:/display');
                 }
             } else {
                 $errorMsg = "Username doesn't exist.";
@@ -37,7 +37,7 @@ class AuthController
         if (isset($_SESSION['user'])) {
             unset($_SESSION['user']);
         }
-        header('Location: ?action=display');
+        header('Location: /display');
     }
 
     // REGISTER
@@ -66,7 +66,7 @@ class AuthController
                 $_SESSION['user'] = $user;
                 $manager->persist($user);
                 $manager->flush();
-                header('Location: ?action=display');
+                header('Location: /display');
             }
         } else {
             include "../templates/register.php";
