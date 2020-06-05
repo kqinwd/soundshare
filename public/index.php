@@ -109,9 +109,10 @@ switch ($action) {
     case 'new':
         if (isset($_SESSION['user']) && isset($_POST['title']) && isset($_POST['link']) && isset($_POST['content']) && isset($_POST['genre'])) {
             $errorMsg = NULL;
-            if (empty($_POST['title'])) {
+
+            if (strlen(trim($_POST['title'])) == 0) {
                 $errorMsg = "Please add a title";
-            } else if ($_POST['genre'] == 'Select genre') {
+            } else if (empty($_POST['genre'])) {
                 $errorMsg = "Please add a genre";
             } else if (empty($_POST['link'])) {
                 $errorMsg = "Missing link";
@@ -133,7 +134,7 @@ switch ($action) {
                 header('Location: ?action=display');
             }
         } else {
-            include '../templates/addPost.php';
+            include "../templates/addPost.php";
         }
         break;
 
