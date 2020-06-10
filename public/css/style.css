@@ -19,6 +19,19 @@ SVG Icons - svgicons.sparkk.fr
   stroke-width: 1;
 }
 
+/* TYPO */
+
+body {
+font-family: 'Montserrat', serif!important;
+}
+
+/* h1,h2,h3,h4,h5,h6 {
+  font-family: 'Playfair Display', sans-serif;
+}
+p {
+  font-size: 18px;
+  font-family: 'Playfair Display', sans-serif;
+} */
 /* SIDENAV */
 
 #body-row {
