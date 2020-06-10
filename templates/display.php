@@ -14,16 +14,15 @@
 </head>
 
 <body>
-
+    {% include '../templates/navbar.php' %}
     <?php
-
-    include "../templates/navbar.php";
+    // include "../templates/navbar.php";
 
     if (isset($_SESSION['user'])) {
         $username = $_SESSION['user']->username;
-        include "../templates/sidenav.php"
+        // include "../templates/sidenav.php"
     ?>
-
+        {% include '../templates/sidenav.php' %}
         <!-- MAIN -->
         <div class="col p-4">
             <div class="text-center">
@@ -34,9 +33,10 @@
             </div>
             <h2 class="ml-4 mb-3 font-weight-bold">Latest posts</h2>
 
+            <!-- DISPLAY ALL POSTS -->
+            {% include '../templates/displayPost.php' %}
         <?php
-        // DISPLAY ALL POSTS
-        include "../templates/displayPost.php";
+
     } else { ?>
             <section>
                 <div class="text-center">

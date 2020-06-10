@@ -1,27 +1,13 @@
 <?php
 
-use Controller\AuthController;
-use Controller\HomeController;
-use Controller\PostController;
-use Entity\Post;
-use Entity\User;
-use ludk\Persistence\ORM;
+use ludk\Http\Kernel;
+use ludk\Http\Request;
 
-require __DIR__ . '/../vendor/autoload.php';
-
-session_start();
-
-$orm = new ORM(__DIR__ . '/../Resources');
-$manager = $orm->getManager();
-$postRepo = $orm->getRepository(Post::class);
-$userRepo = $orm->getRepository(User::class);
-
-// Search by genre
-// if (isset($_GET["search"])) {
-//     $items = $postRepo->findBy(array("genre" => $_GET["search"]));
-// } else {
-//     $items = $postRepo->findAll();
-// }
+require '../vendor/autoload.php';
+$kernel = new Kernel();
+$request = new Request($_GET, $_POST, $_SERVER, $_COOKIE);
+$response = $kernel->handle($request);
+$response->send();
 
 /////////////// FONCTION EMBED VIDEO //////////////////
 // VIDEO YT : clean URL
@@ -48,35 +34,3 @@ function video_iframe_YT($video_url)
     return $video_iframe;
 };
 ////////////////////////////////////////
-
-// $action = $_GET["action"] ?? "display";
-$action = substr(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), 1);
-switch ($action) {
-
-    case 'register':
-        $authControllerRegister = new AuthController;
-        $authControllerRegister->register();
-        break;
-
-    case 'logout':
-        $authControllerLogout = new AuthController();
-        $authControllerLogout->logout();
-        break;
-
-    case 'login':
-        $authControllerLogin = new AuthController();
-        $authControllerLogin->login();
-        break;
-
-    case 'new':
-        $postController = new PostController();
-        $postController->create(); // "add a new post" function
-        break;
-
-    case 'display':
-    default:
-        $items = array();
-        $homeController = new HomeController();
-        $homeController->display();
-        break;
-}

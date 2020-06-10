@@ -2,43 +2,52 @@
 
 namespace Controller;
 
+use ludk\Http\Request;
+use ludk\Http\Response;
+use ludk\Controller\AbstractController;
 use Entity\Post;
 
-class PostController
+class PostController extends AbstractController
 {
-    public function create()
+    public function create(Request $request): Response
     {
-        global $postRepo;
-        global $manager;
+        $postRepo = $this->getOrm()->getRepository(Post::class);
+        $manager = $this->getOrm()->getManager();
 
-        if (isset($_SESSION['user']) && isset($_POST['title']) && isset($_POST['link']) && isset($_POST['content']) && isset($_POST['genre'])) {
+        if (($request->getSession()->has('user')) && $request->request->has('title') && $request->request->has('link') && $request->request->has('content') && $request->request->has('genre')) {
             $errorMsg = NULL;
 
-            if (strlen(trim($_POST['title'])) == 0) {
+            if (empty($request->request->get('title'))) {
                 $errorMsg = "Please add a title";
-            } else if (empty($_POST['genre'])) {
+            } else if (empty($request->request->get('genre'))) {
                 $errorMsg = "Please add a genre";
-            } else if (empty($_POST['link'])) {
+            } else if (empty($request->request->get('link'))) {
                 $errorMsg = "Missing link";
-            } else if (empty($_POST['content'])) {
+            } else if (empty($request->request->get('content'))) {
                 $errorMsg = "Missing description";
             }
             if ($errorMsg) {
-                $posts = $postRepo->findAll();
-                include "../templates/addPost.php";
+                // $posts = $postRepo->findAll();
+
+                $data = array(
+                    "errorMsg" => $errorMsg
+                );
+                return $this->render("addPost.php", $data);
             } else {
                 $newPost = new Post();
-                $newPost->title = $_POST['title'];
-                $newPost->genre = $_POST['genre'];
-                $newPost->content = $_POST['content'];
-                $newPost->link = $_POST['link'];
+                $newPost->title = $request->request->get('title');
+                $newPost->genre = $request->request->get('genre');
+                $newPost->content = $request->request->get('content');
+                $newPost->link = $request->request->get('link');
+                $newPost->user = $request->getSession()->get('user');
+                // $newPost->user = $_SESSION['user'];
                 $manager->persist($newPost);
                 $manager->flush();
-                $newPost->user = $_SESSION['user'];
-                header('Location: /display');
+                return $this->redirectToRoute('display');
             }
         } else {
-            include "../templates/addPost.php";
+            // include "../templates/addPost.php";
+            return $this->render("addPost.php");
         }
     }
 }

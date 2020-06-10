@@ -15,32 +15,33 @@
 
 <body>
 
-    <?php include "../templates/navbar.php" ?>
-    <?php include "../templates/sidenav.php" ?>
+    {% include '../templates/navbar.php' %}
 
+    <?php
+    ?>
+    {% include '../templates/sidenav.php' %}
     <div class="card col-6 p-5 mt-5 shadow mb-5 bg-white rounded text-center mx-auto" style="max-height: 600px;">
         <form method="POST" action="/new">
             <h3 class="text-muted">Post something</h3>
-            <svg class="bi bi-box-arrow-in-right text-muted justify-self-center" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8.146 11.354a.5.5 0 010-.708L10.793 8 8.146 5.354a.5.5 0 11.708-.708l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0z" clip-rule="evenodd" />
-                <path fill-rule="evenodd" d="M1 8a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9A.5.5 0 011 8z" clip-rule="evenodd" />
-                <path fill-rule="evenodd" d="M13.5 14.5A1.5 1.5 0 0015 13V3a1.5 1.5 0 00-1.5-1.5h-8A1.5 1.5 0 004 3v1.5a.5.5 0 001 0V3a.5.5 0 01.5-.5h8a.5.5 0 01.5.5v10a.5.5 0 01-.5.5h-8A.5.5 0 015 13v-1.5a.5.5 0 00-1 0V13a1.5 1.5 0 001.5 1.5h8z" clip-rule="evenodd" />
+            <svg class="bi bi-headphones text-muted" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 0 0-5 5v4.5H2V8a6 6 0 1 1 12 0v4.5h-1V8a5 5 0 0 0-5-5z" />
+                <path d="M11 10a1 1 0 0 1 1-1h2v4a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3zm-6 0a1 1 0 0 0-1-1H2v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3z" />
             </svg>
             <div class="form-group">
-                <label for="titleInput">Title: </label>
-                <input type="text" class="form-control" id="titleInput" name="title" placeholder="" required="">
+                <label for="titleInput"></label>
+                <input type="text" class="form-control" id="titleInput" name="title" placeholder="Title">
             </div>
             <div class="form-group">
-                <label for="linkInput">Add Youtube link here :</label>
-                <input type="urlInput" class="form-control" id="urlInput" name="link" placeholder="" required="">
+                <label for="urlInput"></label>
+                <input type="url" class="form-control" id="urlInput" name="link" placeholder="Add Youtube link here">
             </div>
             <div class="form-group">
-                <label for="genreInput">Genre: </label>
-                <input type="text" class="form-control" id="genreInput" name="genre" placeholder="" required="">
+                <label for="genreInput"></label>
+                <input type="text" class="form-control" id="genreInput" name="genre" placeholder="Genre">
             </div>
             <div class="form-group">
-                <label for="contentInput">Description: </label>
-                <input type="textarea" class="form-control" id="contentInput" name="content" placeholder="" required="">
+                <label for="contentInput"></label>
+                <input type="text" class="form-control" id="contentInput" name="content" placeholder="Description">
             </div>
             <div class="text-center mt-5">
                 <?php

@@ -4,72 +4,85 @@ namespace Controller;
 
 use Entity\User;
 
-class AuthController
+use ludk\Http\Request;
+use ludk\Http\Response;
+use ludk\Controller\AbstractController;
+
+class AuthController extends AbstractController
 {
     // LOGIN
-    public function login()
+    public function login(Request $request): Response
     {
-        global $userRepo;
+        $userRepo = $this->getOrm()->getRepository(User::class);
 
-        if (isset($_POST['username']) && isset($_POST['password'])) {
-            $usersWithThisLogin = $userRepo->findBy(array("username" => $_POST['username']));
+        if ($request->request->has('username') && $request->request->has('password')) {
+            $usersWithThisLogin = $userRepo->findBy(array("username" => $request->request->get('username')));
             if (count($usersWithThisLogin) == 1) {
                 $firstUserWithThisLogin = $usersWithThisLogin[0];
-                if ($firstUserWithThisLogin->password != md5($_POST['password'])) {
+                if ($firstUserWithThisLogin->password != md5($request->request->get('password'))) {
                     $errorMsg = "Wrong password.";
-                    include "../templates/loginform.php";
+                    $this->render("loginform.php");
                 } else {
-                    $_SESSION['user'] = $usersWithThisLogin[0];
-                    header('Location:/display');
+                    $request->getSession()->set('user', $usersWithThisLogin[0]);
+                    // $_SESSION['user'] = $usersWithThisLogin[0];
+                    return $this->redirectToRoute('display');
                 }
             } else {
                 $errorMsg = "Username doesn't exist.";
-                include "../templates/loginform.php";
+                $data = array("errorMsg" => $errorMsg);
+                $this->render("loginform.php", $data);
             }
         } else {
-            include "../templates/loginform.php";
+            // include "../templates/loginform.php";
+
+            return $this->render("loginform.php");
         }
     }
 
     // LOGOUT
-    public function logout()
+    public function logout(Request $request): Response
     {
-        if (isset($_SESSION['user'])) {
-            unset($_SESSION['user']);
+        if ($request->getSession()->has('user')) {
+            $request->getSession()->remove('user');
         }
-        header('Location: /display');
+        return $this->redirectToRoute('display');
     }
 
     // REGISTER
-    public function register()
+    public function register(Request $request): Response
     {
-        global $userRepo;
-        global $manager;
-        if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['passwordRetype'])) {
+        $userRepo = $this->getOrm()->getRepository(User::class);
+        $manager = $this->getOrm()->getManager();
+
+        if ($request->request->has('username') && $request->request->has('password') && $request->request->has('passwordRetype')) {
             $errorMsg = NULL;
-            $users = $userRepo->findBy(array("username" => $_POST['username']));
+            $users = $userRepo->findBy(array("username" => $request->request->get('username')));
             if (count($users) > 0) {
                 $errorMsg = "Username already used.";
-            } else if ($_POST['password'] != $_POST['passwordRetype']) {
+            } else if ($request->request->get('password') != $request->request->get('passwordRetype')) {
                 $errorMsg = "Passwords are not the same.";
-            } else if (strlen(trim($_POST['password'])) < 8) {
+            } else if (strlen(trim($request->request->get('password'))) < 8) {
                 $errorMsg = "Your password should have at least 8 characters.";
-            } else if (strlen(trim($_POST['username'])) < 4) {
+            } else if (strlen(trim($request->request->get('username'))) < 4) {
                 $errorMsg = "Your username should have at least 4 characters.";
             }
             if ($errorMsg) {
-                include "../templates/register.php";
+                $data = array(
+                    "errorMsg" => $errorMsg
+                );
+                $this->render("register.php", $data);
             } else {
                 $user = new User();
-                $user->username = $_POST["username"];
-                $user->password = md5($_POST['password']);
-                $_SESSION['user'] = $user;
+                $user->username = $request->request->get('username');
+                $user->password = md5($request->request->get('password'));
+                // $_SESSION['user'] = $user;
                 $manager->persist($user);
                 $manager->flush();
-                header('Location: /display');
+                $request->getSession()->set('user', $user);
+                return $this->redirectToRoute('display');
             }
         } else {
-            include "../templates/register.php";
+            return $this->render("register.php");
         }
     }
 }

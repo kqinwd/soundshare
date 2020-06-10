@@ -1,5 +1,8 @@
-<?php if (isset($_SESSION['user'])) {
+<?php
+if (isset($_SESSION['user'])) {
+    //  if ($request->getSession()->has('user')) {
     $username = $_SESSION['user']->username;
+    // $username->username = $request->getSession()->get('user');
 }
 ?>
 <!-- Bootstrap NavBar -->
@@ -19,6 +22,7 @@
         <ul class="navbar-nav ml-auto">
             <?php
             if (isset($_SESSION['user'])) {
+                // if (isset($_SESSION['user'])) {
             ?>
                 <li class="nav-item d-sm-none d-lg-block">
                     <a class="nav-link text-light">Welcome back <?php echo $username ?> !</a>
