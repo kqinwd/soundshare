@@ -3,7 +3,7 @@
         "id": 1,
         "creationDate": "date()",
         "title": "Zane Alexander - D i v i s i o n",
-        "genre": "Synthwave",
+        "genre": "synthwave",
         "link": "https://youtu.be/618tRdZWD4g",
         "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.",
         "user": 1
@@ -12,7 +12,7 @@
         "id": 2,
         "creationDate": "date()",
         "title": "Kendrick Lamar - Money Trees",
-        "genre": "Rap",
+        "genre": "rap",
         "link": "https://youtu.be/smqhSl0u_sI",
         "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.",
         "user": 2
@@ -21,7 +21,7 @@
         "id": 3,
         "creationDate": "date()",
         "title": "Tracy Chapman - Bang Bang Bang",
-        "genre": "Neofolk",
+        "genre": "neofolk",
         "link": "https://youtu.be/IrRA7WMI1ks",
         "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.",
         "user": 1
@@ -30,7 +30,7 @@
         "id": 4,
         "creationDate": "date()",
         "title": "Pink Floyd - Wish You Were Here",
-        "genre": "Classic Rock",
+        "genre": "classic rock",
         "link": "https://youtu.be/IXdNnw99-Ic",
         "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum in cumque dolore praesentium rerum placeat minima quasi quo amet laudantium soluta a consequatur, maxime cum nisi ab, error est cupiditate.",
         "user": 2

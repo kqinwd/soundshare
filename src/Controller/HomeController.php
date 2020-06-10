@@ -28,7 +28,7 @@ class HomeController extends AbstractController
                     $items = $postRepo->findBy(array("user" => $user->id));
                 }
             } else {
-                $items = $postRepo->findBy(array("genre" => $strToSearch));
+                $items = $postRepo->findBy(array("genre" => "%$strToSearch%"));
             }
         } else {
             $items = $postRepo->findAll();
