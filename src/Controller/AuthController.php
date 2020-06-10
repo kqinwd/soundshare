@@ -21,7 +21,8 @@ class AuthController extends AbstractController
                 $firstUserWithThisLogin = $usersWithThisLogin[0];
                 if ($firstUserWithThisLogin->password != md5($request->request->get('password'))) {
                     $errorMsg = "Wrong password.";
-                    $this->render("loginform.php");
+                    $data = array("errorMsg" => $errorMsg);
+                    return $this->render("loginform.php", $data);
                 } else {
                     $request->getSession()->set('user', $usersWithThisLogin[0]);
                     // $_SESSION['user'] = $usersWithThisLogin[0];
@@ -30,7 +31,7 @@ class AuthController extends AbstractController
             } else {
                 $errorMsg = "Username doesn't exist.";
                 $data = array("errorMsg" => $errorMsg);
-                $this->render("loginform.php", $data);
+                return $this->render("loginform.php", $data);
             }
         } else {
             // include "../templates/loginform.php";
@@ -70,7 +71,7 @@ class AuthController extends AbstractController
                 $data = array(
                     "errorMsg" => $errorMsg
                 );
-                $this->render("register.php", $data);
+                return $this->render("register.php", $data);
             } else {
                 $user = new User();
                 $user->username = $request->request->get('username');
