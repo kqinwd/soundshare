@@ -14,8 +14,7 @@
 </head>
 
 <body>
-    include "../templates/navbar.php";
-    <?php include "../templates/navbar.php" ?>
+    {% include '../templates/navbar.php' %}
 
     <div class="card col-6 p-5 mt-5 shadow mb-5 bg-white rounded text-center mx-auto">
         <form method="POST" class="/login">

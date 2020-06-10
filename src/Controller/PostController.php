@@ -32,7 +32,7 @@ class PostController extends AbstractController
                 $data = array(
                     "errorMsg" => $errorMsg
                 );
-                return $this->render("addPost.php", $data);
+                // return $this->render("addPost.php", $data);
             } else {
                 $newPost = new Post();
                 $newPost->title = $request->request->get('title');
